@@ -1,0 +1,46 @@
+name: ViG-M3Net
+run_name: 'ViG-M3Net/IXI/batch-16/vig2-tcr'
+save_root: '/checkpoints/'
+image_save: '/results/'
+data: IXI
+
+epoch: 0        # starting epoch
+n_epochs: 120       # How often do you want to display output images during training
+batchSize: 16              # size of the batches
+#batchSize_un: 4
+
+##########IXI###########
+dataroot: 'D:/Users/super/Documents/Datasets/IXI_80percent/percent/train'
+dataroot_un: 'D:/Users/super/Documents/Datasets/IXI_80percent/others/train'
+val_dataroot: 'D:/Users/super/Documents/Datasets/IXI_10percent/others/val'
+
+g_lr: 0.0002                   # initial learning rate
+r_lr: 0.0002
+decay_epoch: 60            # epoch to start linearly decaying the learning rate to 0
+size: 256               # size of the data crop
+input_nc: 3
+output_nc: 3
+cuda: True
+n_cpu: 6
+
+# mine
+val_batchSize: 1
+continue_training: False
+end_epoch: 6
+disc_iters: 1
+
+# Manifold-Matching
+out_dim: 128     # ML network output dim
+margin: 1.4     # triplet loss margin
+alpha: 0.03     # triplet loss direction guidance weight parameter
+ml_lr: 0.0002
+
+not_pretrained: False
+arch: 'not_frozen_normalize'    # 'frozen_normalize'---Frozen denotes that exisiting pretrained batchnorm layers are frozen, and normalize denotes normalization of the output embedding.'
+
+# weight of loss
+lambda_mm: 1
+lambda_img: 20  # 20.0
+lambda_tcr: 20
+lambda_percp: 1   # 0.5
+
